@@ -42,7 +42,7 @@
     line-height: 1.8;
     margin-bottom: 16px;
     opacity:1;
-    transition: opacity 0.4s ease-out;
+    transition: opacity 0.5s ease-out;
   }
   .signature {margin-top:30px; text-align:right; font-weight:bold; color:#4b2e5d;}
 
@@ -112,14 +112,19 @@
 </div>
 
 <script>
-// Subtle fade in/out based on paragraph position in viewport
+// Smooth fade in/out based on paragraph distance from viewport center
 window.addEventListener('scroll', () => {
   const paragraphs = document.querySelectorAll('.card p');
   const windowHeight = window.innerHeight;
+
   paragraphs.forEach(p => {
     const rect = p.getBoundingClientRect();
-    // Fades out when above center, fades in when near center/below
-    let opacity = 0.3 + 0.7 * Math.max(0, Math.min(1, (windowHeight - rect.top) / (windowHeight*1.2)));
+    const pCenter = rect.top + rect.height/2;
+    const distance = Math.abs(windowHeight/2 - pCenter);
+    const maxDistance = windowHeight/2 + rect.height/2;
+    // Subtle fade: opacity between 0.6 and 1
+    let opacity = 1 - 0.4 * (distance / maxDistance);
+    opacity = Math.min(Math.max(opacity, 0.6), 1);
     p.style.opacity = opacity;
   });
 });
