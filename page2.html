@@ -16,26 +16,45 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    /* Decorative floral border */
-    .border {
+    /* Strong visible floral/vine border */
+    .frame {
       position: fixed;
-      inset: 20px;
-      border-radius: 35px;
+      inset: 15px;
+      border-radius: 40px;
+      border: 3px solid rgba(181,126,220,0.8);
+      box-shadow: 0 0 0 8px rgba(216,191,216,0.45),
+                  0 0 40px rgba(181,126,220,0.6);
       pointer-events: none;
-      box-shadow: inset 0 0 0 4px rgba(181,126,220,0.6),
-                  inset 0 0 0 10px rgba(216,191,216,0.35);
     }
 
-    .border::before,
-    .border::after {
-      content: "";
-      position: absolute;
-      inset: -25px;
-      background: repeating-radial-gradient(circle at 20% 20%, rgba(216,191,216,0.35), transparent 120px),
-                  repeating-radial-gradient(circle at 80% 80%, rgba(181,126,220,0.35), transparent 140px);
-      border-radius: 45px;
-      filter: blur(2px);
+    /* Corner flowers */
+    .flower {
+      position: fixed;
+      width: 120px;
+      height: 120px;
+      opacity: 0.9;
+      background: radial-gradient(circle, #e6e6fa 20%, #b57edc 60%, transparent 70%);
+      filter: blur(0.3px);
+      pointer-events: none;
     }
+
+    .tl { top: 0; left: 0; transform: rotate(0deg); }
+    .tr { top: 0; right: 0; transform: rotate(90deg); }
+    .bl { bottom: 0; left: 0; transform: rotate(270deg); }
+    .br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+    /* Vine strokes along edges */
+    .vine {
+      position: fixed;
+      background: linear-gradient(180deg, transparent, #b57edc, transparent);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .vine.left { left: 25px; top: 120px; width: 4px; height: calc(100% - 240px); }
+    .vine.right { right: 25px; top: 120px; width: 4px; height: calc(100% - 240px); }
+    .vine.top { top: 25px; left: 120px; height: 4px; width: calc(100% - 240px); background: linear-gradient(90deg, transparent, #b57edc, transparent); }
+    .vine.bottom { bottom: 25px; left: 120px; height: 4px; width: calc(100% - 240px); background: linear-gradient(90deg, transparent, #b57edc, transparent); }
 
     .content {
       text-align: center;
@@ -57,7 +76,6 @@
     p {
       font-size: 1.2rem;
       color: #5e3b76;
-      margin-bottom: 10px;
     }
 
     button {
@@ -88,40 +106,42 @@
     }
 
     @keyframes fall {
-      to {
-        transform: translateY(115vh) rotate(1080deg);
-      }
+      to { transform: translateY(115vh) rotate(1080deg); }
     }
   </style>
 </head>
 <body>
-  <div class="border"></div>
+  <div class="frame"></div>
+  <div class="flower tl"></div>
+  <div class="flower tr"></div>
+  <div class="flower bl"></div>
+  <div class="flower br"></div>
+  <div class="vine left"></div>
+  <div class="vine right"></div>
+  <div class="vine top"></div>
+  <div class="vine bottom"></div>
 
   <div class="content">
     <h1>Happy Birthday 💜</h1>
-    <p>A day as beautiful as your smile ✨</p>
+    <p>A day as elegant as you ✨</p>
     <button onclick="goNext()">A Message For You</button>
   </div>
 
   <script>
-    function goNext() {
-      window.location.href = "page3.html";
-    }
+    function goNext() { window.location.href = "page3.html"; }
 
     const colors = ['#c0c0c0', '#e6e6fa', '#d8bfd8', '#b57edc', '#f5f5f5'];
-    const shapes = ['8px', '12px', '16px'];
-
-    for (let i = 0; i < 260; i++) {
-      const confetti = document.createElement('div');
-      confetti.classList.add('confetti');
-      const size = shapes[Math.floor(Math.random() * shapes.length)];
-      confetti.style.width = size;
-      confetti.style.height = size;
-      confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
-      confetti.style.left = Math.random() * 100 + 'vw';
-      confetti.style.animationDuration = 4 + Math.random() * 5 + 's';
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      document.body.appendChild(confetti);
+    for (let i = 0; i < 280; i++) {
+      const c = document.createElement('div');
+      c.classList.add('confetti');
+      const size = 6 + Math.random() * 10;
+      c.style.width = size + 'px';
+      c.style.height = size + 'px';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.animationDuration = 4 + Math.random() * 5 + 's';
+      c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(c);
     }
   </script>
 </body>
