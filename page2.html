@@ -1,40 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 💜</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #f6effa, #c8a2c8, #b57edc);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    z-index: 5;
+    position: relative;
+  }
+
+  h1 {
+    font-size: 4rem;
+    color: #4b2e5d;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 6px rgba(150,100,180,0.5);
+  }
+
+  h2 {
+    font-style: italic;
+    color: #4b2e5d;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 4px rgba(150,100,180,0.5);
+    position: relative;
+    z-index: 2;
+  }
+
+  button {
+    font-size: 1.5rem;
+    padding: 15px 40px;
+    border-radius: 25px;
+    border: none;
+    background-color: #b57edc;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(181,126,220,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(181,126,220,0.7);
+  }
+
+  /* Petals animation */
+  .petal {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #e6e6fa 40%, #b57edc 80%);
+    border-radius: 50%;
+    opacity: 0.7;
+    pointer-events: none;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% {transform: translateY(-20px) rotate(0deg);}
+    100% {transform: translateY(60px) rotate(360deg);}
+  }
+
+  /* Soft confetti animation */
+  .confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #d8bfe8;
+    top: -10px;
+    animation: confettiFall linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes confettiFall {
+    0% {transform: translateY(0) rotate(0deg);}
+    100% {transform: translateY(110vh) rotate(360deg);}
+  }
+</style>
+</head>
+<body>
+
 <div class="container">
   <h1>HAPPY BIRTHDAY 💜</h1>
 
   <!-- Her Name with petals -->
-  <div style="position: relative; display: inline-block; margin-bottom: 40px;">
-    <h2 style="font-style: italic; color: #4b2e5d; font-size: 2rem; text-shadow: 1px 1px 4px rgba(150,100,180,0.5); position: relative; z-index: 2;">
-      VAISHALI 💜
-    </h2>
+  <div style="position: relative; display: inline-block;">
+    <h2>VAISHALI 💜</h2>
   </div>
 
   <button onclick="location.href='page3.html'">Click Here 🎉</button>
 </div>
 
 <script>
-// Floating lavender petals behind the name
+// Floating lavender petals behind her name
+const nameContainer = document.querySelector('.container div');
 for(let i=0;i<15;i++){
   const petal = document.createElement('div');
   petal.className='petal';
-  petal.style.position = 'absolute';
-  petal.style.top = Math.random()*50 + '%'; // vertical random inside container
-  petal.style.left = Math.random()*100 + '%'; // horizontal random inside container
+  petal.style.top = Math.random()*50 + '%';
+  petal.style.left = Math.random()*100 + '%';
   petal.style.width = 10+Math.random()*15 + 'px';
   petal.style.height = petal.style.width;
   petal.style.opacity = 0.6 + Math.random()*0.3;
-  petal.style.borderRadius = '50%';
-  petal.style.background = 'radial-gradient(circle, #e6e6fa 40%, #b57edc 80%)';
-  petal.style.animation = `fall ${5+Math.random()*5}s linear infinite`;
-  petal.style.zIndex = 1;
-  document.querySelector('.container div').appendChild(petal);
+  nameContainer.appendChild(petal);
 }
 
-// Keyframes for petals (reuse the same as page background)
-const style = document.createElement('style');
-style.innerHTML = `
-@keyframes fall {
-  0% {transform: translateY(-20px) rotate(0deg);}
-  100% {transform: translateY(60px) rotate(360deg);}
-}`;
-document.head.appendChild(style);
+// Soft background confetti
+for(let i=0;i<30;i++){
+  const c = document.createElement('div');
+  c.className='confetti';
+  c.style.left = Math.random()*100 + 'vw';
+  c.style.animationDuration = 3+Math.random()*5 + 's';
+  c.style.background = `hsl(${Math.random()*360},70%,80%)`;
+  document.body.appendChild(c);
+}
 </script>
+</body>
+</html>
