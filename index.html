@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ✨</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #c8a2c8, #e6e6fa);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 50px 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(192,192,192,0.6);
+    }
+
+    h1 {
+      color: #4b2e5d;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #e6e6e6, #c0c0c0);
+      color: #4b2e5d;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(192,192,192,0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Something Special Awaits 💜</h1>
+    <button onclick="goNext()">Click Here</button>
+  </div>
+
+  <script>
+    function goNext() {
+      window.location.href = "page2.html";
+    }
+  </script>
+</body>
+</html>
