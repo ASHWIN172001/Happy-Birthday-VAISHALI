@@ -7,78 +7,75 @@
 <style>
   body {
     margin: 0;
-    padding: 0;
     font-family: 'Segoe UI', sans-serif;
     background: radial-gradient(circle at top, #f6effa, #c8a2c8, #b57edc);
-    overflow-y: auto; /* Allow scroll */
+    overflow-y: auto;
+    position: relative;
   }
 
-  /* Premium frame + flowers + vines */
-  .frame {
-    position: fixed;
-    inset: 15px;
-    border-radius: 40px;
-    border: 3px solid rgba(181,126,220,0.8);
-    box-shadow: 0 0 0 8px rgba(216,191,216,0.45),
-                0 0 40px rgba(181,126,220,0.6);
-    pointer-events: none;
-  }
+  /* Frame, flowers, vines - same as Page 2 */
+  .frame {position: fixed; inset: 15px; border-radius: 40px; border: 3px solid rgba(181,126,220,0.8); box-shadow:0 0 0 8px rgba(216,191,216,0.45),0 0 40px rgba(181,126,220,0.6); pointer-events:none;}
+  .flower {position: fixed; width: 120px; height: 120px; opacity:0.9; background: radial-gradient(circle, #e6e6fa 20%, #b57edc 60%, transparent 70%); pointer-events:none;}
+  .tl{top:0;left:0;}.tr{top:0;right:0;}.bl{bottom:0;left:0;}.br{bottom:0;right:0;}
+  .vine {position: fixed; opacity:0.7; pointer-events: none;}
+  .vine.left{left:25px; top:120px; width:4px; height:calc(100%-240px); background:linear-gradient(180deg, transparent, #b57edc, transparent);}
+  .vine.right{right:25px; top:120px; width:4px; height:calc(100%-240px); background:linear-gradient(180deg, transparent, #b57edc, transparent);}
+  .vine.top{top:25px; left:120px; height:4px; width:calc(100%-240px); background: linear-gradient(90deg, transparent, #b57edc, transparent);}
+  .vine.bottom{bottom:25px; left:120px; height:4px; width:calc(100%-240px); background: linear-gradient(90deg, transparent, #b57edc, transparent);}
 
-  .flower {
-    position: fixed;
-    width: 120px;
-    height: 120px;
-    opacity: 0.9;
-    background: radial-gradient(circle, #e6e6fa 20%, #b57edc 60%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .tl { top: 0; left: 0; }
-  .tr { top: 0; right: 0; }
-  .bl { bottom: 0; left: 0; }
-  .br { bottom: 0; right: 0; }
-
-  .vine {
-    position: fixed;
-    background: linear-gradient(180deg, transparent, #b57edc, transparent);
-    opacity: 0.7;
-    pointer-events: none;
-  }
-
-  .vine.left { left: 25px; top: 120px; width: 4px; height: calc(100% - 240px); }
-  .vine.right { right: 25px; top: 120px; width: 4px; height: calc(100% - 240px); }
-  .vine.top { top: 25px; left: 120px; height: 4px; width: calc(100% - 240px); background: linear-gradient(90deg, transparent, #b57edc, transparent); }
-  .vine.bottom { bottom: 25px; left: 120px; height: 4px; width: calc(100% - 240px); background: linear-gradient(90deg, transparent, #b57edc, transparent); }
-
-  /* Scrollable card */
+  /* Card layout */
   .card {
     max-width: 800px;
-    margin: 60px auto; /* centered horizontally, scroll vertically */
+    margin: 60px auto;
     background: rgba(255,255,255,0.38);
     border-radius: 35px;
     padding: 50px 60px;
     box-shadow: 0 20px 50px rgba(150,100,180,0.6);
+    position: relative;
+    z-index: 5;
   }
 
-  h1 {
-    text-align: center;
-    color: #4b2e5d;
-    margin-bottom: 30px;
-    letter-spacing: 2px;
-  }
-
+  h1 {text-align:center; color:#4b2e5d; margin-bottom:30px; letter-spacing:2px;}
   p {
     color: #5e3b76;
     font-size: 1.05rem;
     line-height: 1.8;
     margin-bottom: 16px;
+    opacity:1;
+    transition: opacity 0.5s ease-out;
+  }
+  .signature {margin-top:30px; text-align:right; font-weight:bold; color:#4b2e5d;}
+
+  /* Petals animation */
+  .petal {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #f5c7f5 40%, #b57edc 80%);
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% {transform: translateY(-50px) rotate(0deg); opacity:0.8;}
+    50% {opacity:0.5;}
+    100% {transform: translateY(110vh) rotate(360deg); opacity:0.8;}
   }
 
-  .signature {
-    margin-top: 30px;
-    text-align: right;
-    font-weight: bold;
-    color: #4b2e5d;
+  /* Confetti animation */
+  .confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #d8bfe8;
+    top: -10px;
+    animation: confettiFall linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes confettiFall {
+    0% {transform: translateY(0) rotate(0deg);}
+    100% {transform: translateY(110vh) rotate(360deg);}
   }
 </style>
 </head>
@@ -113,5 +110,39 @@
 
   <div class="signature">— Ashwin 💜✨</div>
 </div>
+
+<script>
+// Text fade on scroll
+window.addEventListener('scroll', () => {
+  const paragraphs = document.querySelectorAll('.card p');
+  paragraphs.forEach(p => {
+    const rect = p.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const opacity = Math.max(0, Math.min(1, (windowHeight - rect.top) / windowHeight));
+    p.style.opacity = opacity;
+  });
+});
+
+// Floating petals
+for(let i=0;i<15;i++){
+  const petal = document.createElement('div');
+  petal.className='petal';
+  petal.style.left = Math.random()*100 + 'vw';
+  petal.style.animationDuration = 5+Math.random()*7 + 's';
+  petal.style.width = 10+Math.random()*20 + 'px';
+  petal.style.height = petal.style.width;
+  document.body.appendChild(petal);
+}
+
+// Soft confetti
+for(let i=0;i<30;i++){
+  const c = document.createElement('div');
+  c.className='confetti';
+  c.style.left = Math.random()*100 + 'vw';
+  c.style.animationDuration = 3+Math.random()*5 + 's';
+  c.style.background = `hsl(${Math.random()*360},70%,80%)`;
+  document.body.appendChild(c);
+}
+</script>
 </body>
 </html>
