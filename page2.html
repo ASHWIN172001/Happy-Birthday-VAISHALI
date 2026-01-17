@@ -12,52 +12,63 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #e6e6fa, #c8a2c8);
+      background: radial-gradient(circle at top, #f3e5f5, #c8a2c8);
       font-family: 'Segoe UI', sans-serif;
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      color: #4b2e5d;
-      text-align: center;
-      z-index: 2;
-    }
-
-    button {
-      margin-top: 30px;
-      padding: 14px 36px;
-      font-size: 18px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      background: linear-gradient(135deg, #e6e6e6, #c0c0c0);
-      color: #4b2e5d;
-      font-weight: bold;
-      box-shadow: 0 6px 18px rgba(192,192,192,0.7);
-      transition: transform 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
     }
 
     .content {
       text-align: center;
-      z-index: 2;
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 50px 60px;
+      border-radius: 25px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(192,192,192,0.6);
+    }
+
+    h1 {
+      font-size: 3.8rem;
+      color: #4b2e5d;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #5e3b76;
+    }
+
+    button {
+      margin-top: 35px;
+      padding: 16px 42px;
+      font-size: 18px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f0f0f0, #c0c0c0);
+      color: #4b2e5d;
+      font-weight: bold;
+      box-shadow: 0 8px 22px rgba(192,192,192,0.8);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 30px rgba(192,192,192,1);
     }
 
     .confetti {
       position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: silver;
       top: -10px;
+      width: 8px;
+      height: 14px;
+      opacity: 0.9;
       animation: fall linear infinite;
     }
 
     @keyframes fall {
       to {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translateY(110vh) rotate(720deg);
       }
     }
   </style>
@@ -65,6 +76,7 @@
 <body>
   <div class="content">
     <h1>Happy Birthday 💜</h1>
+    <p>Today is a little more special ✨</p>
     <button onclick="goNext()">A Message For You</button>
   </div>
 
@@ -73,14 +85,17 @@
       window.location.href = "page3.html";
     }
 
-    // Confetti generator
-    for (let i = 0; i < 80; i++) {
+    const colors = ['#c0c0c0', '#e6e6fa', '#d8bfd8', '#f5f5f5', '#b39ddb'];
+
+    for (let i = 0; i < 180; i++) {
       const confetti = document.createElement('div');
       confetti.classList.add('confetti');
       confetti.style.left = Math.random() * 100 + 'vw';
-      confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
-      confetti.style.opacity = Math.random();
-      confetti.style.backgroundColor = Math.random() > 0.5 ? '#c0c0c0' : '#d8bfd8';
+      confetti.style.animationDuration = 3 + Math.random() * 4 + 's';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confetti.style.width = 6 + Math.random() * 6 + 'px';
+      confetti.style.height = 10 + Math.random() * 10 + 'px';
       document.body.appendChild(confetti);
     }
   </script>
