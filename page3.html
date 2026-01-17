@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Message For You 💜</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top, #f6effa, #c8a2c8, #b57edc);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      overflow: hidden;
+    }
+
+    /* Same premium frame + vines as page 2 */
+    .frame {
+      position: fixed;
+      inset: 15px;
+      border-radius: 40px;
+      border: 3px solid rgba(181,126,220,0.8);
+      box-shadow: 0 0 0 8px rgba(216,191,216,0.45),
+                  0 0 40px rgba(181,126,220,0.6);
+      pointer-events: none;
+    }
+
+    .flower {
+      position: fixed;
+      width: 120px;
+      height: 120px;
+      opacity: 0.9;
+      background: radial-gradient(circle, #e6e6fa 20%, #b57edc 60%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .tl { top: 0; left: 0; }
+    .tr { top: 0; right: 0; }
+    .bl { bottom: 0; left: 0; }
+    .br { bottom: 0; right: 0; }
+
+    .vine {
+      position: fixed;
+      background: linear-gradient(180deg, transparent, #b57edc, transparent);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .vine.left { left: 25px; top: 120px; width: 4px; height: calc(100% - 240px); }
+    .vine.right { right: 25px; top: 120px; width: 4px; height: calc(100% - 240px); }
+    .vine.top { top: 25px; left: 120px; height: 4px; width: calc(100% - 240px); background: linear-gradient(90deg, transparent, #b57edc, transparent); }
+    .vine.bottom { bottom: 25px; left: 120px; height: 4px; width: calc(100% - 240px); background: linear-gradient(90deg, transparent, #b57edc, transparent); }
+
+    .card {
+      max-width: 760px;
+      background: rgba(255, 255, 255, 0.38);
+      padding: 55px 65px;
+      border-radius: 35px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 50px rgba(150,100,180,0.6);
+      z-index: 5;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4b2e5d;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    p {
+      color: #5e3b76;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .signature {
+      margin-top: 35px;
+      text-align: right;
+      font-weight: bold;
+      color: #4b2e5d;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame"></div>
+  <div class="flower tl"></div>
+  <div class="flower tr"></div>
+  <div class="flower bl"></div>
+  <div class="flower br"></div>
+  <div class="vine left"></div>
+  <div class="vine right"></div>
+  <div class="vine top"></div>
+  <div class="vine bottom"></div>
+
+  <div class="card">
+    <h1>Just For You 💜✨</h1>
+
+    <p>On this 🎉 special day, I just wanted to pause ✨ for a moment and celebrate 💜 you.</p>
+    <p>Your presence 🌸 has a quiet way of making things feel lighter 🌿 and better 💫.</p>
+    <p>Every smile 😊 of yours carries a warmth 💖 that stays longer ✨ than the moment itself.</p>
+    <p>You have a rare elegance 🌷 — not loud, not forced 💜, just naturally 🌟 you.</p>
+    <p>I admire 💎 the way you handle life 🌿 with grace ✨ and calm strength.</p>
+    <p>Some people leave impressions 💭, and some leave feelings 💜 — you do both 🌸.</p>
+    <p>Being around you 🤍, even in small moments 🌿, feels genuinely ✨ comforting.</p>
+    <p>More than anything 🌈, I wish for you 💜 to always be happy 😊 and stress-free 🕊️, no matter what life brings.</p>
+    <p>I hope your days 🌼 are gentle on your heart 💫 and kind 🤍 to your mind.</p>
+    <p>May this year 🌟 give you peace ✨, confidence 😊, and reasons 💜 to smile effortlessly.</p>
+    <p>You deserve 🌿 a life where worries feel lighter ✨ and happiness 🌸 feels natural.</p>
+    <p>Thank you 💖 for simply being who you are 🙏 — it truly ✨ matters.</p>
+    <p>This message 💌 comes with nothing but sincerity 🌷 and good wishes 💫.</p>
+    <p>If this brings 😊 even a small smile 💜 to you today ✨, then it has done its job.</p>
+
+    <div class="signature">— Ashwin 💜✨</div>
+  </div>
+</body>
+</html>
