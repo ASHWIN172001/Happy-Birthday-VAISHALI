@@ -1,148 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle at top, #f6effa, #c8a2c8, #b57edc);
-      font-family: 'Segoe UI', sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday VAISHALI 💜</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #f6effa, #c8a2c8, #b57edc);
+    overflow: hidden;
+    position: relative;
+  }
 
-    /* Strong visible floral/vine border */
-    .frame {
-      position: fixed;
-      inset: 15px;
-      border-radius: 40px;
-      border: 3px solid rgba(181,126,220,0.8);
-      box-shadow: 0 0 0 8px rgba(216,191,216,0.45),
-                  0 0 40px rgba(181,126,220,0.6);
-      pointer-events: none;
-    }
+  /* Frame, flowers, vines */
+  .frame {position: fixed; inset: 15px; border-radius: 40px; border: 3px solid rgba(181,126,220,0.8); box-shadow:0 0 0 8px rgba(216,191,216,0.45),0 0 40px rgba(181,126,220,0.6); pointer-events:none;}
+  .flower {position: fixed; width: 120px; height: 120px; opacity:0.9; background: radial-gradient(circle, #e6e6fa 20%, #b57edc 60%, transparent 70%); pointer-events:none;}
+  .tl{top:0;left:0;}.tr{top:0;right:0;}.bl{bottom:0;left:0;}.br{bottom:0;right:0;}
+  .vine {position: fixed; opacity:0.7; pointer-events: none;}
+  .vine.left{left:25px; top:120px; width:4px; height:calc(100%-240px); background:linear-gradient(180deg, transparent, #b57edc, transparent);}
+  .vine.right{right:25px; top:120px; width:4px; height:calc(100%-240px); background:linear-gradient(180deg, transparent, #b57edc, transparent);}
+  .vine.top{top:25px; left:120px; height:4px; width:calc(100%-240px); background: linear-gradient(90deg, transparent, #b57edc, transparent);}
+  .vine.bottom{bottom:25px; left:120px; height:4px; width:calc(100%-240px); background: linear-gradient(90deg, transparent, #b57edc, transparent);}
 
-    /* Corner flowers */
-    .flower {
-      position: fixed;
-      width: 120px;
-      height: 120px;
-      opacity: 0.9;
-      background: radial-gradient(circle, #e6e6fa 20%, #b57edc 60%, transparent 70%);
-      filter: blur(0.3px);
-      pointer-events: none;
-    }
+  h1 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: #4b2e5d;
+    font-style: italic;
+    text-shadow: 2px 2px 6px rgba(150,100,180,0.5);
+  }
 
-    .tl { top: 0; left: 0; transform: rotate(0deg); }
-    .tr { top: 0; right: 0; transform: rotate(90deg); }
-    .bl { bottom: 0; left: 0; transform: rotate(270deg); }
-    .br { bottom: 0; right: 0; transform: rotate(180deg); }
+  /* Petals animation */
+  .petal {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #e6e6fa 40%, #b57edc 80%);
+    border-radius: 50%;
+    opacity: 0.7;
+    pointer-events: none;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% {transform: translateY(-50px) rotate(0deg); opacity:0.7;}
+    50% {opacity:0.5;}
+    100% {transform: translateY(110vh) rotate(360deg); opacity:0.7;}
+  }
 
-    /* Vine strokes along edges */
-    .vine {
-      position: fixed;
-      background: linear-gradient(180deg, transparent, #b57edc, transparent);
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .vine.left { left: 25px; top: 120px; width: 4px; height: calc(100% - 240px); }
-    .vine.right { right: 25px; top: 120px; width: 4px; height: calc(100% - 240px); }
-    .vine.top { top: 25px; left: 120px; height: 4px; width: calc(100% - 240px); background: linear-gradient(90deg, transparent, #b57edc, transparent); }
-    .vine.bottom { bottom: 25px; left: 120px; height: 4px; width: calc(100% - 240px); background: linear-gradient(90deg, transparent, #b57edc, transparent); }
-
-    .content {
-      text-align: center;
-      z-index: 5;
-      background: rgba(255, 255, 255, 0.35);
-      padding: 60px 70px;
-      border-radius: 30px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 15px 40px rgba(150,100,180,0.6);
-    }
-
-    h1 {
-      font-size: 4rem;
-      color: #4b2e5d;
-      margin-bottom: 18px;
-      letter-spacing: 3px;
-    }
-
-    p {
-      font-size: 1.2rem;
-      color: #5e3b76;
-    }
-
-    button {
-      margin-top: 40px;
-      padding: 18px 46px;
-      font-size: 18px;
-      border: none;
-      border-radius: 45px;
-      cursor: pointer;
-      background: linear-gradient(135deg, #fafafa, #c0c0c0);
-      color: #4b2e5d;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 10px 28px rgba(192,192,192,0.9);
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 14px 38px rgba(192,192,192,1);
-    }
-
-    .confetti {
-      position: absolute;
-      top: -20px;
-      opacity: 0.9;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      to { transform: translateY(115vh) rotate(1080deg); }
-    }
-  </style>
+  /* Confetti animation */
+  .confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #d8bfe8;
+    top: -10px;
+    animation: confettiFall linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes confettiFall {
+    0% {transform: translateY(0) rotate(0deg);}
+    100% {transform: translateY(110vh) rotate(360deg);}
+  }
+</style>
 </head>
 <body>
-  <div class="frame"></div>
-  <div class="flower tl"></div>
-  <div class="flower tr"></div>
-  <div class="flower bl"></div>
-  <div class="flower br"></div>
-  <div class="vine left"></div>
-  <div class="vine right"></div>
-  <div class="vine top"></div>
-  <div class="vine bottom"></div>
+<div class="frame"></div>
+<div class="flower tl"></div>
+<div class="flower tr"></div>
+<div class="flower bl"></div>
+<div class="flower br"></div>
+<div class="vine left"></div>
+<div class="vine right"></div>
+<div class="vine top"></div>
+<div class="vine bottom"></div>
 
-  <div class="content">
-    <h1>Happy Birthday 💜</h1>
-    <p>A day as elegant as you ✨</p>
-    <button onclick="goNext()">A Message For You</button>
-  </div>
+<h1>VAISHALI 💜</h1>
 
-  <script>
-    function goNext() { window.location.href = "page3.html"; }
+<script>
+// Floating lavender petals
+for(let i=0;i<25;i++){
+  const petal = document.createElement('div');
+  petal.className='petal';
+  petal.style.left = Math.random()*100 + 'vw';
+  petal.style.animationDuration = 5+Math.random()*7 + 's';
+  petal.style.width = 15+Math.random()*15 + 'px';
+  petal.style.height = petal.style.width;
+  document.body.appendChild(petal);
+}
 
-    const colors = ['#c0c0c0', '#e6e6fa', '#d8bfd8', '#b57edc', '#f5f5f5'];
-    for (let i = 0; i < 280; i++) {
-      const c = document.createElement('div');
-      c.classList.add('confetti');
-      const size = 6 + Math.random() * 10;
-      c.style.width = size + 'px';
-      c.style.height = size + 'px';
-      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
-      c.style.left = Math.random() * 100 + 'vw';
-      c.style.animationDuration = 4 + Math.random() * 5 + 's';
-      c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      document.body.appendChild(c);
-    }
-  </script>
+// Soft confetti
+for(let i=0;i<30;i++){
+  const c = document.createElement('div');
+  c.className='confetti';
+  c.style.left = Math.random()*100 + 'vw';
+  c.style.animationDuration = 3+Math.random()*5 + 's';
+  c.style.background = `hsl(${Math.random()*360},70%,80%)`;
+  document.body.appendChild(c);
+}
+</script>
 </body>
 </html>
