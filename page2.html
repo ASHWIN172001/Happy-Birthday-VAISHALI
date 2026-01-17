@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #e6e6fa, #c8a2c8);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      color: #4b2e5d;
+      text-align: center;
+      z-index: 2;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 14px 36px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #e6e6e6, #c0c0c0);
+      color: #4b2e5d;
+      font-weight: bold;
+      box-shadow: 0 6px 18px rgba(192,192,192,0.7);
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .content {
+      text-align: center;
+      z-index: 2;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: silver;
+      top: -10px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Happy Birthday 💜</h1>
+    <button onclick="goNext()">A Message For You</button>
+  </div>
+
+  <script>
+    function goNext() {
+      window.location.href = "page3.html";
+    }
+
+    // Confetti generator
+    for (let i = 0; i < 80; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
+      confetti.style.opacity = Math.random();
+      confetti.style.backgroundColor = Math.random() > 0.5 ? '#c0c0c0' : '#d8bfd8';
+      document.body.appendChild(confetti);
+    }
+  </script>
+</body>
+</html>
